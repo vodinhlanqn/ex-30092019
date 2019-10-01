@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <h2>Nhập điểm trung bình</h2>
+    <input type="text" class="name" placeholder="Nhập tên của bạn" onfocus="Focus(this)">
+    <input type=" text" class="numberGPA" placeholder="Nhập điểm trung bình" onfocus="Focus(this)">
+    <button type=" button" onclick="myGPA()">Xếp loại</button>
+    <p class="result"></p>
+
+    <script>
+        function myGPA() {
+            let username, GPA, resultGPA;
+            username = document.querySelector('.name').value;
+            GPA = document.querySelector('.numberGPA').value;
+            resultGPA = document.querySelector('.result');
+        // kiểm tra dữ liệu nhập vào
+            if (username == "" || GPA == "") {
+                resultGPA.innerHTML = "Vui lòng nhập đủ dữ liệu";
+                return false;
+            }
+            else if (isNaN(GPA) || GPA < 0 || GPA > 10) {
+                resultGPA.innerHTML = "Giá trị nhập vào không hợp lệ";
+                return false;
+            }
+        // Tạo 1 mảng chứa dữ liệu
+            let GPARange = [
+                { "ten": "Yếu", "diem": 5 },
+                { "ten": "Trung Bình", "diem": 7 },
+                { "ten": "Khá", "diem": 9 },
+                { "ten": "Giỏi", "diem": 10 },
+                { "ten": "Xuất Xắc", "diem": 11 }
+            ];
+            for (let i = 0; i < 5; i++) {
+                if (GPA < GPARange[i]["diem"]) {
+                    resultGPA.innerHTML = "Bạn <b>" + username + "</b> được xếp loại: <b> " + GPARange[i]["ten"] + "</b>";
+                    break;
+                }
+            }
+        }
+        //Khi hover vào ô nhập dữ liệu, dữ liệu tự động xóa
+        function Focus(object) {
+            object.value = "";
+        }
+
+    </script>
+</body>
+
+</html>
